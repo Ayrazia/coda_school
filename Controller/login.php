@@ -1,15 +1,17 @@
     <?php
+   /**
+    * @var PDO $pdo
+*/
+
     require "Model/login.php";
-    require "View/login.php";
 
         if (isset($_POST['login_button'])){}
-            $username = !empty($_POST["username"])?$_POST["username"]:null;
-            $password = !empty($_POST["password"])?$_POST["password"]:null;
+            $username = !empty($_POST["username"])?cleanString($_POST["username"]):null;
+            $password = !empty($_POST["password"])?cleanString($_POST["password"]):null;
 
             if (!empty($username) && !empty($password)){
-                $username = cleanString($username);
-                $password = cleanString($password);
-
                 $user = getUser($pdo, $username);
-                var_dump($user);
+
+                $isMatchPassword = is_array($user) && password_verify($password, $user['password']);
             }
+    require "View/login.php";
