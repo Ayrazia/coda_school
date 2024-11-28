@@ -16,6 +16,7 @@
 
                 if ($isMatchPassword){
                     $_SESSION['auth'] = true;
+                    header("Location: index.php");
                 } else {
                     $errers[] = 'L\'identification a échoué';
                 }
