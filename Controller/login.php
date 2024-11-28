@@ -13,5 +13,11 @@
                 $user = getUser($pdo, $username);
 
                 $isMatchPassword = is_array($user) && password_verify($password, $user['password']);
+
+                if ($isMatchPassword){
+                    $_SESSION['auth'] = true;
+                } else {
+                    $errers[] = 'L\'identification a échoué';
+                }
             }
     require "View/login.php";
