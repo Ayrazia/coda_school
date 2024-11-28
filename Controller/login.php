@@ -14,9 +14,11 @@
 
                 $isMatchPassword = is_array($user) && password_verify($password, $user['password']);
 
-                if ($isMatchPassword){
+                if ($isMatchPassword && $user['enabled']){
                     $_SESSION['auth'] = true;
                     header("Location: index.php");
+                } elseif (!$user['enabled'] && $isMatchPassword){
+                    $errers[] = "Votre compte n'est pas activé";
                 } else {
                     $errers[] = 'L\'identification a échoué';
                 }

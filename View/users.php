@@ -23,13 +23,22 @@
                     <td><?php echo $user['id']; ?></td>
                     <td><?php echo $user['username']; ?></td>
                     <td>
-                    <a href="index.php?compenent=users&action=toggle_enabled&id=<?php echo $user['id']; ?>">
-                        <i class="fa-solid <?php echo ($user['enabled'])
-                            ? "fa-check text-success"
-                            : "fa-solid fa-xmark text-danger" ?> "></i>
+                        <a href="index.php?component=users&action=toggle-enabled&id=<?php echo $user['id']; ?>">
+                            <i class="fa-solid <?php echo ($user['enabled'])
+                                ? "fa-check text-success"
+                                : "fa-solid fa-xmark text-danger" ?> "></i>
                     </a>
                     </td>
+                    <td>
+                        <a
+                                href="index.php?component=users&action=delete&id=<?php echo $user['id']; ?>">
+                            <i class="fa-solid fa-trash" style="color: #ff0000;"></i>
+                        </a>
+                        <a href="index.php?component=user&action=edit&id=<?php echo $user['id']; ?>">
+                            <i class="fa-solid fa-pen ms-3"></i>
+                        </a>
 
+                    </td>
                 </tr>
             <?php endforeach;?>
         </tbody>
