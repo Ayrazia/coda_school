@@ -3,6 +3,11 @@
     require 'Include/database.php';
     require 'Include/functions.php';
     $errors = [];
+
+    if (isset($_GET['deconnect'])) {
+        session_destroy();
+        header("Location: index.php");
+    }
     ?>
 
 
@@ -18,6 +23,7 @@
     <?php
 
         if (isset($_SESSION['auth'])){
+            require('_partials/navbar.php');
 
         if (isset($_GET['component'])) {
             $componentName = cleanString($_GET['component']);
