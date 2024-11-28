@@ -1,6 +1,10 @@
 <?php
-    require "Model/users.php";
+require "Model/users.php";
+/**
+ * @var PDO $pdo
+ */
 
+    $users = GetAll($pdo);
 
 
 
