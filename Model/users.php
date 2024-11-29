@@ -14,26 +14,13 @@
         $res->execute();
     }
 
-    function delete(PDO $pdo, int $id)
-    {
-        try {
-            $res = $pdo->prepare('DELETE FROM users WHERE id = :id');
-            $res->bindParam(':id', $id, PDO::PARAM_INT);
-            $res->execute();
-        }catch (Exception $e){
-            return $e->getMessage();
-        }
+function delete(PDO $pdo, int $id)
+{
+    try {
+        $res = $pdo->prepare('DELETE FROM users WHERE id = :id');
+        $res->bindParam(':id', $id, PDO::PARAM_INT);
+        return $res->execute();
+    } catch (Exception $e) {
+        return false;
     }
-
-    function edit(PDO $pdo, int $id, string $username, string $email){
-        try {
-            $res = $pdo->prepare('UPDATE users SET username = :username, email = :email WHERE id = :id');
-            $res->bindParam(':username', $username, PDO::PARAM_STR);
-            $res->bindParam(':email', $email, PDO::PARAM_STR);
-            $res->bindParam(':id', $id, PDO::PARAM_INT);
-            $res->execute();
-        }catch (Exception $e){
-            return $e->getMessage();
-        }
-
-    }
+}

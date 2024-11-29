@@ -18,9 +18,9 @@
                     $_SESSION['auth'] = true;
                     header("Location: index.php");
                 } elseif (!$user['enabled'] && $isMatchPassword){
-                    $errers[] = "Votre compte n'est pas activé";
+                    $errors[] = "Votre compte n'est pas activé";
                 } else {
-                    $errers[] = 'L\'identification a échoué';
+                    $errors[] = 'L\'identification a échoué';
                 }
             }
     require "View/login.php";

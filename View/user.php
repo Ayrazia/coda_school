@@ -1,35 +1,44 @@
+<a href="index.php?component=users" style="text-decoration: none;">
+    <i class="fa-solid fa-arrow-left fa-xl" style="font-size: medium;"></i>
+    <span style="margin-left: 10px;">Retour sans modification</span>
+</a>
+
+
+
 <form method="post">
-    <a href="index.php?component=users"
-    <i class="mb-5 justify-content-start fa-solid fa-arrow-left fa-xl"></i>
-    </a>
     <div class="mb-3">
         <label for="username" class="form-label">Identifiant</label>
-        <input type="text" name="username" id="username" class="form-control"
-               value="<?php echo isset($user['username']) ? $user['username'] : ""; ?>" required>
+        <input type="text" name="username" id="username" class="form-control" value="<?php  echo (isset($user['username'])) ? $user['username'] : ''; ?>" required>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" id="email" class="form-control"
-               value="<?php echo isset($user['email']) ? $user['email'] : ""; ?>" required>
+        <input type="email" name="email" id="email" class="form-control"  value="<?php  echo (isset($user['email'])) ? $user['email'] : ''; ?>" required>
     </div>
     <div class="mb-3">
         <label for="pass" class="form-label">Mot de passe</label>
-        <input type="password" name="pass" id="pass"
-               class="form-control" <?php echo isset($id) ? "" : "required"; ?>>
+        <input type="password" name="pass" id="pass" class="form-control" <?php echo isset($_GET['id']) ? null : 'required'; ?>>
     </div>
     <div class="mb-3">
         <label for="confirmation" class="form-label">Confirmation du mot de passe</label>
-        <input type="password" name="confirmation" id="confirmation"
-               class="form-control" <?php echo isset($id) ? "" : "required"; ?>>
+        <input type="password" name="confirmation" id="confirmation" class="form-control" <?php echo isset($_GET['id']) ? null : 'required'; ?>>
     </div>
     <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="enabled"
-               name="enabled" <?php echo isset($user['enabled']) && $user['enabled'] ? "checked" : ""; ?>>
+        <input
+            type="checkbox"
+            class="form-check-input"
+            id="enabled"
+            name="enabled"
+            <?php  echo (isset($user['enabled']) && $user['enabled']) ? 'checked' : null; ?>
+        >
         <label class="form-check-label" for="enabled">Actif</label>
     </div>
     <div class="mb-3 d-flex justify-content-end">
-        <button type="submit"  class="btn <?php echo isset($id) ? "btn-success" : "btn-primary" ?>"
-                name="<?php echo isset($id) ? "edit_button" : "valid_button"; ?>"> <?php echo isset($id) ? "Modifier" : "Enregistrer"; ?></button>
+        <button
+            type="submit"
+            class="btn <?php echo isset($_GET['id']) ? 'btn-success' : 'btn-primary'; ?>"
+            name="<?php echo isset($_GET['id']) ? 'edit_button' : 'valid_button'; ?>"
+        >
+            <?php  echo isset($_GET['id']) ? 'Enregistrer' : 'Créer'; ?>
+        </button>
     </div>
-
 </form>

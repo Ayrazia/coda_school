@@ -3,31 +3,33 @@ require "Model/users.php";
 /**
  * @var PDO $pdo
  */
-    if (isset($_GET['action']) &&
-        isset($_GET['id']) &&
-        is_numeric($_GET['id']) )
-    {
-        $id = cleanString($_GET['id']);
 
+if (isset($_GET['action']) && isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = cleanString($_GET['id']); // nettoyage des données
 
-        switch($_GET['action']) {
-            case 'toggle_enabled':
-                toggleEnabled($pdo, $id);
-                header("Location: index.php?component=users");
+    switch ($_GET['action']) {
+        case 'toggle_enabled':
+            toggleEnabled($pdo, $id);
+            header("Location: index.php?component=users");
+            exit;
 
-                break;
-                case 'delete':
-                    $deleted = delete($pdo, $id);
-                    if (!empty ($deleted)) {
-                        $errors[] = "impossible de supprimer, il est lier a une personne !";
-                    }else{
-                    header("Location: index.php?component=users");
-                    }
-                    break;
+        case 'delete':
+            break;
+    }
+}
 
-        }
-     }
+if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
+    $idToDelete = $_GET['delete_id'];
 
-    $users = GetAll($pdo);
+    $deleted = delete($pdo, $idToDelete);
+    if ($deleted) {
+        header("Location: index.php?component=users");
+        exit;
+    } else {
+        $errors[] = "Impossible de supprimer cet utilisateur.";
+    }
+}
 
-    require 'View/users.php';
+$users = GetAll($pdo);
+
+require 'View/users.php';
